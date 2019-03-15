@@ -1,6 +1,7 @@
 
 import React, { Component } from "react"
 import { geoPath } from "d3-geo"
+import Svg from 'react-native-svg';
 
 import {
   calculateResizeFactor,
@@ -108,8 +109,8 @@ class ZoomableGroup extends Component {
   handleResize() {
     const { width, height, projection, zoom } = this.props
 
-    const resizeFactorX = calculateResizeFactor(this.zoomableGroupNode.parentNode.getBoundingClientRect().width, width)
-    const resizeFactorY = calculateResizeFactor(this.zoomableGroupNode.parentNode.getBoundingClientRect().height, height)
+    const resizeFactorX = 1
+    const resizeFactorY = 1
 
     const xPercentageChange = 1 / resizeFactorX * this.state.resizeFactorX
     const yPercentageChange = 1 / resizeFactorY * this.state.resizeFactorY
@@ -124,8 +125,8 @@ class ZoomableGroup extends Component {
   componentDidMount() {
     const { width, height, projection, zoom } = this.props
 
-    const resizeFactorX = calculateResizeFactor(this.zoomableGroupNode.parentNode.getBoundingClientRect().width, width)
-    const resizeFactorY = calculateResizeFactor(this.zoomableGroupNode.parentNode.getBoundingClientRect().height, height)
+    const resizeFactorX = 1
+    const resizeFactorY = 1
 
     this.setState({
       resizeFactorX: resizeFactorX,
@@ -134,14 +135,14 @@ class ZoomableGroup extends Component {
       mouseY: calculateMousePosition("y", projection, this.props, zoom, resizeFactorY),
     })
 
-    window.addEventListener("resize", this.handleResize)
-    window.addEventListener("mouseup", this.handleMouseUp)
-    this.zoomableGroupNode.addEventListener("touchmove", this.preventTouchScroll)
+    //window.addEventListener("resize", this.handleResize)
+    //window.addEventListener("mouseup", this.handleMouseUp)
+    //this.zoomableGroupNode.addEventListener("touchmove", this.preventTouchScroll)
   }
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleResize)
-    window.removeEventListener("mouseup", this.handleMouseUp)
-    this.zoomableGroupNode.removeEventListener("touchmove", this.preventTouchScroll)
+    //window.removeEventListener("resize", this.handleResize)
+    //window.removeEventListener("mouseup", this.handleMouseUp)
+    //this.zoomableGroupNode.removeEventListener("touchmove", this.preventTouchScroll)
   }
   render() {
     const {
@@ -161,7 +162,7 @@ class ZoomableGroup extends Component {
     } = this.state
 
     return (
-      <g className="rsm-zoomable-group"
+      <Svg.G className="rsm-zoomable-group"
          ref={ zoomableGroupNode => this.zoomableGroupNode = zoomableGroupNode }
          transform={`
            translate(
@@ -179,7 +180,7 @@ class ZoomableGroup extends Component {
          onTouchEnd={ this.handleMouseUp }
          style={ style }
       >
-        <rect
+        <Svg.Rect
           x={ this.state.backdrop.x }
           y={ this.state.backdrop.y }
           width={ this.state.backdrop.width }
@@ -188,7 +189,7 @@ class ZoomableGroup extends Component {
           style={{ strokeWidth: 0 }}
         />
         { createNewChildren(children, this.props) }
-      </g>
+      </Svg.G>
     )
   }
 }

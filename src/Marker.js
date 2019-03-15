@@ -1,6 +1,7 @@
 
 import React, { Component } from "react"
 import { geoLength } from "d3-geo"
+import Svg from 'react-native-svg';
 
 class Marker extends Component {
   constructor() {
@@ -118,7 +119,7 @@ class Marker extends Component {
     const isHidden = isGlobe && geoLength(lineString) > radians
 
     return (
-      <g className={ `rsm-marker${ pressed ? " rsm-marker--pressed" : "" }${ hover ? " rsm-marker--hover" : "" }` }
+      <Svg.G className={ `rsm-marker${ pressed ? " rsm-marker--pressed" : "" }${ hover ? " rsm-marker--hover" : "" }` }
          transform={ `translate(
            ${ translation[0] }
            ${ translation[1] }
@@ -128,14 +129,14 @@ class Marker extends Component {
          onMouseLeave={ this.handleMouseLeave }
          onMouseDown={ this.handleMouseDown }
          onMouseUp={ this.handleMouseUp }
-         onClick={ this.handleMouseClick }
+         onPress={ this.handleMouseClick }
          onMouseMove={ this.handleMouseMove }
          onFocus={ this.handleFocus }
          onBlur={ this.handleBlur }
          tabIndex={ tabable ? 0 : -1 }
        >
         { children }
-      </g>
+      </Svg.G>
     )
   }
 }

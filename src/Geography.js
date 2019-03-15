@@ -1,6 +1,7 @@
 
 import React, { Component } from "react"
 import { geoPath } from "d3-geo"
+import Svg from 'react-native-svg';
 
 import { roundPath } from "./utils"
 
@@ -147,7 +148,7 @@ class Geography extends Component {
       }, {})
 
     return (
-      <path
+      <Svg.Path
         d={ pathString }
         className={ `rsm-geography${ pressed ? " rsm-geography--pressed" : "" }${ hover ? " rsm-geography--hover" : "" }` }
         style={ style[pressed || hover ? (pressed ? "pressed" : "hover") : "default"] }
